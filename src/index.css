@@ -1,24 +1,41 @@
+/* Tailwind v4 entry */
 @import "tailwindcss";
 
+/* --- Theme tokens (v4) so bg-background, text-foreground, etc. work --- */
+@theme {
+  --color-background: 218 11% 2%;
+  --color-foreground: 160 2% 75%;
+  --color-card: 218 11% 2%;
+  --color-card-foreground: 160 2% 75%;
+  --color-popover: 218 11% 2%;
+  --color-popover-foreground: 160 2% 75%;
+  --color-primary: 0 0% 78%;
+  --color-primary-foreground: 218 11% 2%;
+  --color-secondary: 160 2% 75%;
+  --color-secondary-foreground: 218 11% 2%;
+  --color-muted: 0 0% 15%;
+  --color-muted-foreground: 0 0% 78%;
+  --color-accent: 194 19% 96%;
+  --color-accent-foreground: 218 11% 2%;
+  --color-destructive: 0 84% 60%;
+  --color-destructive-foreground: 194 19% 96%;
+  --color-border: 0 0% 15%;
+  --color-input: 0 0% 15%;
+  --color-ring: 160 2% 75%;
 
-/* hero icon chips — match the screenshot look */
-.icon-chip {
-  @apply relative inline-flex h-9 w-9 items-center justify-center 
-         rounded-full text-white/90 border border-white/10 
-         bg-white/[0.06] backdrop-blur;
-  /* subtle ring + depth */
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,0.06),
-    0 10px 30px rgba(0,0,0,0.45);
+  /* design tokens you use elsewhere */
+  --radius-lg: .75rem;
+  --shadow-soft: 0 24px 60px rgba(0,0,0,.5);
+  --shadow-card: 0 10px 30px rgba(0,0,0,.35);
 }
-.icon-chip::after{
-  content:"";
-  position:absolute; inset:0; border-radius:9999px;
-  /* soft outer halo like the screenshot */
-  box-shadow: 0 0 0 6px rgba(255,255,255,0.04);
-}
-.icon-chip:hover { background: rgba(255,255,255,0.10); }
 
+/* Small custom utilities used in your JSX */
+@utility max-w-wrapper { max-width: 1100px; }
+@utility shadow-soft { box-shadow: var(--shadow-soft); }
+@utility shadow-card { box-shadow: var(--shadow-card); }
+
+/* Global behavior */
+html { scroll-behavior: smooth; }
 
 /* --- Hero icon chips --- */
 .icon-row { @apply flex items-center justify-center gap-3; }
@@ -36,8 +53,6 @@
   position: absolute; inset: 0; border-radius: 9999px;
   box-shadow: 0 0 0 6px rgba(255,255,255,0.04);
 }
-
-/* icon size inside chip */
 .icon-chip .lucide { width: 16px; height: 16px; }
 
 /* bounce animation */
@@ -47,20 +62,15 @@
 }
 .chip-bounce { animation: chip-bounce 1.8s ease-in-out infinite; }
 
-
-/* index.css */
-html { scroll-behavior: smooth; }
-
-
-
-/* === Services cards (match screenshot) === */
+/* --- Services cards --- */
 .service-card{
   @apply relative h-full rounded-2xl border border-white/10 bg-black/80 p-6
-         shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-300
-         ease-out transform-gpu will-change-transform;
+         transition duration-300 ease-out transform-gpu will-change-transform;
+  box-shadow: var(--shadow-card);
 }
 .service-card:hover{
-  @apply -translate-y-1 border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.5)];
+  @apply -translate-y-1 border-white/20;
+  box-shadow: var(--shadow-soft);
 }
 /* subtle inner outline */
 .service-card::before{
@@ -68,7 +78,7 @@ html { scroll-behavior: smooth; }
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
   pointer-events:none;
 }
-/* soft corner glow (bottom-right like the ref) */
+/* soft corner glow (bottom-right like the reference) */
 .service-card::after{
   content:""; position:absolute; right:-8%; bottom:-10%;
   width:40%; height:40%; border-radius:9999px;
