@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+
+/* hero icon chips — match the screenshot look */
+.icon-chip {
+  @apply relative inline-flex h-9 w-9 items-center justify-center 
+         rounded-full text-white/90 border border-white/10 
+         bg-white/[0.06] backdrop-blur;
+  /* subtle ring + depth */
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 10px 30px rgba(0,0,0,0.45);
+}
+.icon-chip::after{
+  content:"";
+  position:absolute; inset:0; border-radius:9999px;
+  /* soft outer halo like the screenshot */
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.04);
+}
+.icon-chip:hover { background: rgba(255,255,255,0.10); }
+
+
+/* --- Hero icon chips --- */
+.icon-row { @apply flex items-center justify-center gap-3; }
+
+.icon-chip {
+  @apply relative inline-flex h-9 w-9 items-center justify-center
+         rounded-full text-white/90 border border-white/10
+         bg-white/[0.06] backdrop-blur;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 10px 30px rgba(0,0,0,0.45);
+}
+.icon-chip::after {
+  content: "";
+  position: absolute; inset: 0; border-radius: 9999px;
+  box-shadow: 0 0 0 6px rgba(255,255,255,0.04);
+}
+
+/* icon size inside chip */
+.icon-chip .lucide { width: 16px; height: 16px; }
+
+/* bounce animation */
+@keyframes chip-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+.chip-bounce { animation: chip-bounce 1.8s ease-in-out infinite; }
+
+
+/* index.css */
+html { scroll-behavior: smooth; }
+
+
+
+/* === Services cards (match screenshot) === */
+.service-card{
+  @apply relative h-full rounded-2xl border border-white/10 bg-black/80 p-6
+         shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-300
+         ease-out transform-gpu will-change-transform;
+}
+.service-card:hover{
+  @apply -translate-y-1 border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.5)];
+}
+/* subtle inner outline */
+.service-card::before{
+  content:""; position:absolute; inset:0; border-radius:1rem;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+  pointer-events:none;
+}
+/* soft corner glow (bottom-right like the ref) */
+.service-card::after{
+  content:""; position:absolute; right:-8%; bottom:-10%;
+  width:40%; height:40%; border-radius:9999px;
+  background: radial-gradient(closest-side, rgba(255,255,255,.05), transparent 70%);
+  filter: blur(6px);
+  pointer-events:none;
+}
+
+/* icon badge */
+.service-badge{
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-lg
+         border border-white/10 bg-white/[0.06] text-white/90;
+}
+
+/* divider above the Learn More link */
+.service-divider{ @apply my-4 h-px bg-white/10; }
